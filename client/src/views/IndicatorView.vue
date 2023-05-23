@@ -2,7 +2,7 @@
 //
 </script>
 <template>
-    Жопа индикаторы
+    Работа с индикаторами
 </template>
 <style lang="scss" scoped>
 //style

@@ -19,6 +19,12 @@ export class ListOfDisciplinesController {
         return this.listOfDisciplinesService.getDiscipline(id);
     }
 
+    // Получить все дисциплины по учебной программе
+    @Get('correction/:id')
+    public getCorrectionList(@Param('id') id: number) {
+        return this.listOfDisciplinesService.getCorrectionList(id);
+    }
+
     // Получить список всех предметов по учебной программе
     @Put('updateDiscipline/:id')
     public updateDiscipline(@Param('id') id: number, @Body() body: List_of_disciplines) {

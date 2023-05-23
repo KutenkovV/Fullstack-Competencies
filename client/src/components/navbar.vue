@@ -19,7 +19,7 @@ import { RouterLink } from 'vue-router'
                     </li>
                     <li class="nav-item">
                         <RouterLink to="/correction" active-class="active" class="nav-link">
-                            <a>Предложения</a>
+                            <a>Замечания</a>
                         </RouterLink>
                     </li>
                     <li class="nav-item">

@@ -17,7 +17,6 @@ export class EducationalProgramController {
         return this.educationalService.getProgramm(id);
     }
 
-
     // Получить все дисциплины по учебной программе
     @Get('subject/:id')
     public getDisciplineList(@Param('id') id: number) {

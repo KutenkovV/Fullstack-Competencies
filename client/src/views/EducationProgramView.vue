@@ -70,6 +70,23 @@ async function onUpdateDiscipline() {
     getRes();
 }
 
+const idC = ref()
+const remarkC = ref()
+
+async function OnCreateCorrection() {
+    await axios.post("/api/correction-list/create", {
+        list_of_disciplines_id: idC.value,
+        remark: remarkC.value,
+    })
+    getRes();
+}
+
+// const dataCorrection
+async function getCorrection(id: number) {
+    let res = await axios.get("/api/list-of-disciplines/correction/" + id)
+}
+
+
 </script>
 <template>
     <router-link :to=" '/education' ">
@@ -77,7 +94,7 @@ async function onUpdateDiscipline() {
     </router-link>
 
     <div class="d-flex align-items-center"
-        v-for="(                   item, index                   ) in                   dataTitle                  "
+        v-for="(item, index) in dataTitle"
         :key=" index ">
         <h1>{{ item.code }}</h1>
         <h2 class="ms-2">{{ item.title }}</h2>
@@ -166,14 +183,38 @@ async function onUpdateDiscipline() {
         </div>
     </div>
 
+        <!-- Modal correction -->
+        <div class="modal fade" id="staticBackdrop-3" data-bs-keyboard="true" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <form class="modal-content" @submit.prevent="OnCreateCorrection()">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Оставить замечание</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Введите замечание</label>
+                        <textarea v-model=" remarkC " required class="form-control" id="exampleFormControlTextarea1"
+                            rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">отменить</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <h4 class="modal-title mt-2 fs-4">Список дисциплин</h4>
     <hr class="m-0" />
 
-    <div class="mt-3" v-for="                item                 in                 dataSubject                "
-        :key=" item.id ">
+    <div class="mt-3" v-for=" item in dataSubject" :key="item.id ">
         <div class="d-flex aligne-items-center mb-2 justify-content-between">
             <h4 class="fw-medium fs-5" style="color: #0d6efd">{{ item.title }}</h4>
             <div>
+                <button @click="idC = item.id" type="submit" data-bs-toggle="modal" class="btn btn-warning me-3" data-bs-target="#staticBackdrop-3">Оставить замечание</button>
                 <button @click="onGetDiscipline(item.id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop-2"
                     type="submit" class="btn btn-success me-3">Редактировать</button>
                 <button type="submit" @click=" onSubDelete(item.id)" class="btn btn-danger me-3">Удалить</button>
@@ -193,6 +234,11 @@ async function onUpdateDiscipline() {
             <div>
                 <h3 class="fs-6">Навыки:</h3>
                 <a>{{ item.abilities }}</a>
+                <hr>
+            </div>
+            <div>
+                <h3 style="color: #ff9767;" class="fs-6">Замечания:</h3>
+                <a>{{  }}</a>
             </div>
         </div>
     </div>
@@ -201,4 +247,4 @@ async function onUpdateDiscipline() {
         <hr class="m-0" />
     </div>
 </template>
-<style lang="scss" scoped>//style</style>
+<style lang="scss" scoped></style>

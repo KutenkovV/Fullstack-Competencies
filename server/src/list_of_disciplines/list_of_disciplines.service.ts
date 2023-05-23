@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { List_of_disciplines } from 'src/entities/list_of_disciplines.entity';
 import { Repository } from 'typeorm';
 import AppDataSource from 'src/typeorm.config';
+import { Correction_list } from 'src/entities/correction_list.entity';
 
 @Injectable()
 export class ListOfDisciplinesService {
@@ -18,7 +19,6 @@ export class ListOfDisciplinesService {
     }
 
     public async updateDiscipline(id: number, data: List_of_disciplines) {
-        console.log(data);
         // await this.findOne(id);
         return this.list_of_disciplinesModale.update(id, data)
         // await AppDataSource
@@ -32,6 +32,17 @@ export class ListOfDisciplinesService {
         // console.log(discipline);
         // return discipline;
     }
+
+    public async getCorrectionList(id: number) {
+        const program = await AppDataSource.manager
+            .createQueryBuilder()
+            .select("correction_list")
+            .from(Correction_list, 'correction_list')
+            .where("correction_list.list_of_disciplines_id = :id", { id })
+            .getMany()
+        return program;
+    }
+
     findOne(id: number) {
         throw new Error('Method not implemented.');
     }
