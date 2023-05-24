@@ -1,6 +1,6 @@
 # Решение тестового задания на позицию "Программист-разработчик"
 
-обзор:
+обзор (тыкните на картинку, это видео):
 [![Everything Is AWESOME](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](https://youtu.be/cCHwpvTR4CQ "OMG")
 
 
